@@ -3,6 +3,7 @@ module.exports ={
     firstName:"STRING",
     lastName:"STRING",
     emailId:"STRING",
-    password:"STRING"
+    password:"STRING",
+    registrationNo:"STRING"
   }
 }
