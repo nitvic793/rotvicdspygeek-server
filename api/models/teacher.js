@@ -18,5 +18,8 @@ module.exports = {
     },
     password:"STRING",
     registrationNo:"STRING"
+    school : {
+      model:"School"
+    }
   }
 };
