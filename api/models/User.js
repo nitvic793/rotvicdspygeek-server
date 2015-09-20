@@ -22,6 +22,7 @@ module.exports = {
     encryptedPassword: {
       type: 'string'
     },
+    
     // We don't wan't to send back encrypted password either
     toJSON: function () {
       var obj = this.toObject();

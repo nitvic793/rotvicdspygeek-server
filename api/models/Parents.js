@@ -10,7 +10,11 @@ module.exports = {
   attributes: {
     firstName:"STRING",
     lastName:"STRING",
-    emailId:"STRING",
+    email:{
+      type: 'email',
+      required: 'true',
+      unique: true // Yes unique one
+    },
     password:"STRING"
   }
 };
