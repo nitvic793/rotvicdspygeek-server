@@ -17,7 +17,7 @@ module.exports = {
       unique: true // Yes unique one
     },
     password:"STRING",
-    registrationNo:"STRING"
+    registrationNo:"STRING",
     school : {
       model:"School"
     }
