@@ -8,7 +8,6 @@
 module.exports = {
 
   attributes: {
-    attributes:  {
       class: {
         model:"Class"
       },
@@ -19,5 +18,4 @@ module.exports = {
         model:"Subject"
       }
     }
-  }
 };
