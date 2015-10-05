@@ -47,7 +47,7 @@ module.exports = {
             });
           }
           else {
-            sails.models.Teacher.findOne({ email: email } , function(err,teacher){
+            Teacher.findOne({ email: email } , function(err,teacher){
               if (!teacher) {
                 return res.json(401, {err: 'invalid email or password'});
               }
