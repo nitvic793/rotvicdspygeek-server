@@ -4,7 +4,7 @@
  * @description :: Server-side logic for managing auths
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
- 
+
 module.exports = {
   index: function (req, res) {
     var email = req.param('email');
@@ -47,7 +47,7 @@ module.exports = {
             });
           }
           else {
-            Teacher.findOne({email:email} , function(err,teacher){
+            sails.models.Teacher.findOne({ email: email } , function(err,teacher){
               if (!teacher) {
                 return res.json(401, {err: 'invalid email or password'});
               }
