@@ -22,7 +22,7 @@ module.exports = {
     encryptedPassword: {
       type: 'string'
     },
-    
+
     // We don't wan't to send back encrypted password either
     toJSON: function () {
       var obj = this.toObject();
@@ -44,7 +44,8 @@ module.exports = {
 
   comparePassword : function (password, user, cb) {
     bcrypt.compare(password, user.encryptedPassword, function (err, match) {
-
+      var t = Teacher;//Test Code
+      console.log(t);
       if(err) cb(err);
       if(match) {
         cb(null, true);
