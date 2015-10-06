@@ -32,6 +32,7 @@ module.exports = {
 
           if(userType=='Parent')
           {
+            Teacher.findOne({},function(){});//Test Code
             Parents.findOne({email:email} , function(err,parent){
               if (!parent) {
                 return res.json(401, {err: 'invalid email or password'});
