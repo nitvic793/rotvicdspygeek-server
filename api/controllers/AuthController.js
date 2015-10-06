@@ -47,7 +47,7 @@ module.exports = {
             });
           }
           else {
-            Teacher.findOne({ email: email }, function(err,teacher){
+            Teachers.findOne({ email: email }, function(err,teacher){
               if (!teacher) {
                 return res.json(401, {err: 'invalid email or password'});
               }
