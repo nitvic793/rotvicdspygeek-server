@@ -67,6 +67,6 @@ module.exports = {
     })
   },
   test: function(req,res){
-    return {t:Teacher};
+    return res.json({t:Teacher});
   }
 };
