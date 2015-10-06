@@ -5,9 +5,8 @@
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
-
 module.exports = {
-
+  
   attributes: {
     firstName:"STRING",
     lastName:"STRING",
