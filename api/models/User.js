@@ -44,8 +44,6 @@ module.exports = {
 
   comparePassword : function (password, user, cb) {
     bcrypt.compare(password, user.encryptedPassword, function (err, match) {
-      var t = Teacher;//Test Code
-      console.log(t);
       if(err) cb(err);
       if(match) {
         cb(null, true);
