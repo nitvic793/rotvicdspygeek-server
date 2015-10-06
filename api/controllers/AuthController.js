@@ -47,7 +47,7 @@ module.exports = {
             });
           }
           else {
-            Teacher.findOne({ email: email }, function(err,teacher){
+            Teachers.findOne({ email: email }, function(err,teacher){ //Apparently adding an 's' fixes things. Fuck you Heroku!
               if (!teacher) {
                 return res.json(401, {err: 'invalid email or password'});
               }
