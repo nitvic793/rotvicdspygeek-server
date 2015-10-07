@@ -55,7 +55,7 @@ module.exports.policies = {
     create:'createUser'
   },
 
-  TeacherController:{
+  TeachersController:{
     create:'createUser'
   }
 };
