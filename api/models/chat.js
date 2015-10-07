@@ -12,7 +12,7 @@ module.exports = {
       model:"Parents"
     },
     teacher:{
-      model:"Teacher"
+      model:"Teachers"
     },
     senderId:"STRING",
     sender:"STRING", //Teacher or Parent

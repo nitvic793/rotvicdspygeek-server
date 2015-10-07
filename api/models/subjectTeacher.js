@@ -12,7 +12,7 @@ module.exports = {
         model:"Class"
       },
       teacher:{
-        model:"Teacher"
+        model:"Teachers"
       },
       subject:{
         model:"Subject"

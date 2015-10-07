@@ -12,7 +12,7 @@ module.exports = {
       model:"Student"
     },
     teacher:{
-      model:"Teacher"
+      model:"Teachers"
     },
     review:{
       type:"String"
