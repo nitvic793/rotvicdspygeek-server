@@ -17,7 +17,10 @@ module.exports = {
     },
     registrationNo: "STRING",
     class:{
-        model:"class"
+        model:"Class"
+    },
+    school:{
+      model:"School"
     }
   }
 };
