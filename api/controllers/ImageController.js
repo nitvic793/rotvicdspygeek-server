@@ -5,8 +5,14 @@
  * @help        :: See http://sailsjs.org/#!/documentation/concepts/Controllers
  */
 var fs = require("fs");
+var cloudinary = require('cloudinary');
 module.exports = {
 	upload: function(req,res){
+		cloudinary.config({
+  		cloud_name: 'bitstax',
+  		api_key: '755214483942831',
+  		api_secret: '3iMMFs3rt38w0pOxcQAwY7kz4B4'
+		}); //Temporary solution
 		req.file('image').upload(function (err, files) {
 		 if (err)
 			 return res.serverError(err);
@@ -15,9 +21,12 @@ module.exports = {
  			 files: files
  		 };
 		 files.forEach(function(val,i,a){
-			 fs.unlink(val.fd);
+			 cloudinary.uploader.upload(val.fd, function(result) {
+  		 		console.log(result);
+					fs.unlink(val.fd);
+		 	 });
+
 		 });
-		 console.log("upload", result);
 		 return res.json(result);
 	 });
 	}
