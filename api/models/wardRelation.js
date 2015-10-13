@@ -14,6 +14,12 @@ module.exports = {
     parent:{
       model:"Parents"
     },
-    type:"STRING" //Mother, Father or Gaurdian
+    type:"STRING", //Parent or Gaurdian
+    approved: {
+      type: 'boolean',
+      defaultsTo: 'false',
+      size: 1,
+      boolean: true
+    }
   }
 };
