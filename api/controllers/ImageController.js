@@ -21,13 +21,18 @@ module.exports = {
  			 files: files
  		 };
 		 files.forEach(function(val,i,a){
-			 cloudinary.uploader.upload(val.fd, function(result) {
-  		 		console.log(result);
+			 cloudinary.uploader.upload(val.fd, function(cresult) {
+					var imageObj = {
+						name:val.filename,
+						url:cresult.secure_url
+					};
+					Image.create(imageObj).exec(function(err,data){
+						console.log(data);
+					});
 					fs.unlink(val.fd);
 		 	 });
-
 		 });
-		 return res.json(result);
+		  return res.json(result);
 	 });
 	}
 };

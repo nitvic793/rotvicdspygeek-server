@@ -14,6 +14,9 @@ module.exports = {
     teacher: {
       model:"Teachers"
     },
+    images:{
+      type:"array"
+    },
     announcement:"STRING", //Teacher or Parent
     time:"DATETIME"
   }
