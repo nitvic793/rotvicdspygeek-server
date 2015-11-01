@@ -15,10 +15,14 @@ module.exports = {
       required: 'true',
       unique: true // Yes unique one
     },
-    password:"STRING",
     registrationNo:"STRING",
     school : {
       model:"School"
     }
+  },
+  beforeCreate: function (body,next) {
+    delete body.password;
+    delete body.confirmPassword;
+    next();
   }
 };

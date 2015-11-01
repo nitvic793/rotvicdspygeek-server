@@ -6,7 +6,7 @@
 */
 
 module.exports = {
-  
+
   attributes: {
     firstName:"STRING",
     lastName:"STRING",
@@ -15,7 +15,6 @@ module.exports = {
       required: 'true',
       unique: true // Yes unique one
     },
-    password:"STRING",
     registrationNo:"STRING",
     school : {
       model:"School"

@@ -14,6 +14,10 @@ module.exports = {
       required: 'true',
       unique: true // Yes unique one
     },
-    password:"STRING"
+  },
+  beforeCreate: function (body,next) {
+    delete body.password;
+    delete body.confirmPassword;
+    next();
   }
 };
