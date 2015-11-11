@@ -17,7 +17,7 @@ module.exports = {
     },
     registrationNo:"STRING",
     school : {
-      model:"School"
+      model:"Schools"
     }
   }
 };

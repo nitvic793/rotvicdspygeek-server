@@ -20,7 +20,7 @@ module.exports = {
         model:"Class"
     },
     school:{
-      model:"School"
+      model:"Schools"
     }
   }
 };

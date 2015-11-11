@@ -7,7 +7,13 @@
 {% block content %}
 <div class="row">
 <div class="large-12 columns">
-  <p>Hello There</p>
+<h3>Add Class</h3>
+<hr/>
+<form action="../subject/create" method="post">
+<input type="text" placeholder="Subject Name" name="subjectName"/>
+
+<input type="submit" class="button" value="Add Record">
+</form>
 </div>
 </div>
 {% endblock %}
