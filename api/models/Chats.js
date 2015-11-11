@@ -8,7 +8,15 @@
 module.exports = {
 
   attributes: {
-
+    parent:{
+      model:"Parents"
+    },
+    teacher:{
+      model:"Teachers"
+    },
+    senderId:"STRING",
+    sender:"STRING", //Teacher or Parent
+    message:"STRING",
+    time:"DATETIME"
   }
 };
-
