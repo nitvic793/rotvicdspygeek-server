@@ -19,7 +19,7 @@ module.exports = {
 				Parents.findOne({'id':req.body.parent}).exec(function(err,data){
 					if(data.pushToken){
 						var notification = {
-							"tokens":[data.pushToken._token],
+							"tokens":[data.pushToken],
 							"notification":{
 								"title": "Message from " + data.firstname,
 								"alert":req.body.message
