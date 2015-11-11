@@ -23,7 +23,7 @@ module.exports = {
 	},
 	addStudent: function(req,res){
 		Schools.find({}).exec(function(err,data){
-			Class.find({}).exec(function(err,classes){
+			Classes.find({}).exec(function(err,classes){
 				var payload = {schools:data, clses:classes};
 				return res.view('AddStudent',payload);
 			});

@@ -9,7 +9,7 @@ module.exports = {
 
   attributes: {
       class: {
-        model:"Class"
+        model:"Classes"
       },
       teacher:{
         model:"Teachers"
