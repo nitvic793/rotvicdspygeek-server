@@ -18,5 +18,5 @@ module.exports = {
     sender:"STRING", //Teacher or Parent
     message:"STRING",
     time:"DATETIME"
-  }
+  } //Add aftercreate and push here
 };
