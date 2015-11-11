@@ -10,7 +10,7 @@
 <h3>Add School</h3>
 <hr/>
 <!--Will need to use AJAX after security is implemented-->
-  <form action="../school/create" method="post">
+  <form action="../schools/create" method="post">
   <input type="text" placeholder="School Name" name="schoolName"/>
   <input type="text" placeholder="City" name="city"/>
   <input type="text" placeholder="Country" name="country"/>
