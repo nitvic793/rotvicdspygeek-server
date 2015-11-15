@@ -21,9 +21,7 @@ module.exports = {
       }
     }
 		Chats.create(req.body).exec(function(err,data){
-      if(err){
-        console.log("Error: ", err);
-      }
+      console.log(data);
 			var pushToken;
 			if(data.sender=='Teacher'){
 				Parents.findOne({'id':req.body.parent}).exec(function(err,data){
@@ -42,7 +40,7 @@ module.exports = {
 			}
 			else{
 				Teachers.findOne({'id':req.body.teacher}).exec(function(err,data){
-          sendSocketMessage(req.body.teacher,req.body.message);
+          sendSocketMessage(req.body.teacher,req.body);
 					if(data.pushToken){
 						var notification = {
 							"tokens":[data.pushToken._token],
