@@ -17,7 +17,7 @@ module.exports = {
     function sendSocketMessage(userId, message){
       console.log("Sending to Socket: ",userId);
       if(sockets[userId]){
-        sails.sockets.emit(sockets[userId],"message",{message:message});
+        sails.sockets.emit(sockets[userId],"message",message);
       }
     }
 		Chats.create(req.body).exec(function(err,data){
@@ -27,7 +27,7 @@ module.exports = {
 			var pushToken;
 			if(data.sender=='Teacher'){
 				Parents.findOne({'id':req.body.parent}).exec(function(err,data){
-          sendSocketMessage(req.body.parent,req.body.message);
+          sendSocketMessage(req.body.parent,req.body);
 					if(data.pushToken){
 						var notification = {
 							"tokens":[data.pushToken],
