@@ -14,17 +14,20 @@ var sockets = []; //HACK!
 
 module.exports = {
 	createChat: function(req,res){
-    function sendSocketMessage(userId){
+    function sendSocketMessage(userId, message){
       console.log("Sending to Socket: ",userId);
       if(sockets[userId]){
-        sails.sockets.emit(sockets[userId],"message",{"status":"New Message"});
+        sails.sockets.emit(sockets[userId],"message",{message:message});
       }
     }
 		Chats.create(req.body).exec(function(err,data){
+      if(err){
+        console.log("Error: ", err);
+      }
 			var pushToken;
 			if(data.sender=='Teacher'){
 				Parents.findOne({'id':req.body.parent}).exec(function(err,data){
-          sendSocketMessage(req.body.parent);
+          sendSocketMessage(req.body.parent,req.body.message);
 					if(data.pushToken){
 						var notification = {
 							"tokens":[data.pushToken],
@@ -39,7 +42,7 @@ module.exports = {
 			}
 			else{
 				Teachers.findOne({'id':req.body.teacher}).exec(function(err,data){
-          sendSocketMessage(req.body.teacher);
+          sendSocketMessage(req.body.teacher,req.body.message);
 					if(data.pushToken){
 						var notification = {
 							"tokens":[data.pushToken._token],
