@@ -12,6 +12,7 @@
 
 var sockets = []; //HACK!
 
+
 module.exports = {
 	createChat: function(req,res){
     function sendSocketMessage(userId, message){
@@ -43,7 +44,7 @@ module.exports = {
           sendSocketMessage(req.body.teacher,req.body);
 					if(data.pushToken){
 						var notification = {
-							"tokens":[data.pushToken._token],
+							"tokens":[data.pushToken],
 							"notification":{
 								"title": "Message from " + data.firstname,
 								"alert":req.body.message
