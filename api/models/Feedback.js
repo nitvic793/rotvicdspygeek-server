@@ -8,7 +8,9 @@
 module.exports = {
 
   attributes: {
-
+    feedback:"STRING",
+    user:{
+      model:"User"
+    }
   }
 };
-
