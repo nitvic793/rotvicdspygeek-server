@@ -16,9 +16,14 @@ var sockets = []; //HACK!
 module.exports = {
 	createChat: function(req,res){
     function sendSocketMessage(userId, message){
-      console.log("Sending to Socket: ",userId);
+      console.log("Sending to Socket: ",userId, sockets[userId]);
       if(sockets[userId]){
+        try{
         sails.sockets.emit(sockets[userId],"message",message);
+        }
+        catch(e){
+          console.log("Exception: ",e);
+        }
       }
     }
 		Chats.create(req.body).exec(function(err,data){
