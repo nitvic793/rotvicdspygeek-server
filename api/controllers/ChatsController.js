@@ -36,7 +36,7 @@ module.exports = {
 							"tokens":[data.pushToken],
 							"notification":{
 								"title": "Message from " + data.firstname,
-								"alert":req.body.message
+								"alert": "Message from " + data.firstname
 								}
 						};
 						ionicPushServer(credentials, notification);
@@ -51,7 +51,7 @@ module.exports = {
 							"tokens":[data.pushToken],
 							"notification":{
 								"title": "Message from " + data.firstname,
-								"alert":req.body.message
+								"alert": "Message from " + data.firstname
 								}
 						};
 						ionicPushServer(credentials, notification);
