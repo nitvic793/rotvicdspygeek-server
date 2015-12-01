@@ -12,7 +12,6 @@
 
 var sockets = []; //HACK!
 
-
 module.exports = {
 	createChat: function(req,res){
     function sendSocketMessage(userId, message){
@@ -63,9 +62,9 @@ module.exports = {
 		});
 	},
   getSocketID: function(req, res) {
-  if (!req.isSocket) return res.badRequest();
-  var socketId = sails.sockets.id(req.socket);
-  return res.json({socketId:socketId});
+    if (!req.isSocket) return res.badRequest();
+    var socketId = sails.sockets.id(req.socket);
+    return res.json({socketId:socketId});
   },
   registerSocket: function(req,res){
     if(req.body.userId && req.body.socketId){

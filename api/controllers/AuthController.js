@@ -4,7 +4,7 @@
  * @description :: Server-side logic for managing auths
  * @help        :: See http://links.sailsjs.org/docs/controllers
  */
-
+var sendgrid  = require('sendgrid')("bitstax", "Abcd1234");
 module.exports = {
   index: function (req, res) {
     var email = req.param('email');
@@ -69,4 +69,5 @@ module.exports = {
   test: function(req,res){
     return res.json({t:Teacher});
   }
+  
 };
