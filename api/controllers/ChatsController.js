@@ -14,6 +14,25 @@ var sockets = []; //HACK!
 
 module.exports = {
 	createChat: function(req,res){
+
+    function getUsers(parentId,teacherId, cb){
+      Parents.findOne({id:parentId}).exec(function(err,parent){
+        if(!err){
+          Teachers.findOne({'id':teacherId}).exec(function(err,teacher){
+            if(!err){
+              cb(parent,teacher);
+            }
+            else{
+              cb(parent,null);
+            }
+          });
+        }
+        else{
+          cb(null,null);
+        }
+      });
+    }
+
     function sendSocketMessage(userId, message){
       console.log("Sending to Socket: ",userId, sockets[userId]);
       if(sockets[userId]){
@@ -37,8 +56,9 @@ module.exports = {
 							"notification":{
 								"title": "Message from " + data.firstname,
 								"alert": "Message from " + data.firstname
-								}
+              }
 						};
+            console.log("Message from " + data.firstname);
 						ionicPushServer(credentials, notification);
 					}
 				});
@@ -52,8 +72,10 @@ module.exports = {
 							"notification":{
 								"title": "Message from " + data.firstname,
 								"alert": "Message from " + data.firstname
-								}
+              }
+
 						};
+            console.log("Message from " + data.firstname);
 						ionicPushServer(credentials, notification);
 					}
 				});

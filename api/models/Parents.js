@@ -14,6 +14,9 @@ module.exports = {
       required: 'true',
       unique: true // Yes unique one
     },
+    school:{
+      model:"Schools"
+    }
   },
   beforeCreate: function (body,next) {
     delete body.password;

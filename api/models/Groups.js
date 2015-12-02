@@ -1,25 +1,21 @@
 /**
-* Chats.js
+* Groups.js
 *
 * @description :: TODO: You might write a short summary of how this model works and what it represents here.
 * @docs        :: http://sailsjs.org/#!documentation/models
 */
 
 module.exports = {
-
   attributes: {
-    parent:{
-      model:"Parents"
+    groupName:"STRING",
+    teachers:{
+      collection:"Teachers"
     },
-    teacher:{
-      model:"Teachers"
+    parents:{
+      collection:"Parents"
     },
-    senderId:"STRING",
-    sender:"STRING", //Teacher or Parent
-    message:"STRING",
-    time:"DATETIME",
-    group:{
-      model:"Groups"
-    }
+    groupOwner:{
+      model:"User"
+    } //Id of group owner. Since it could be
   }
 };
