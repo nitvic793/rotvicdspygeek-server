@@ -103,9 +103,11 @@ module.exports = {
             console.log("Message from " + data.firstname);
 						ionicPushServer(credentials, notification);
             sendSocketMessage(val,message);
+        }
         });
       });
     }
+
     Chats.create(req.body).exec(function(err,data){
       Groups.findOne({id:req.body.group}).exec(function(err,group){
         sendPush(group.users, req.body);
