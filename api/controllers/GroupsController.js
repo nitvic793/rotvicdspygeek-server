@@ -6,6 +6,26 @@
  */
 
 module.exports = {
-	
+	getGroupsWithUser:function(req,res){
+		var userId = req.param('user');
+		if(!userId || userId==''){
+			return res.badRequest();
+		}
+		Groups.find({}).populate('users').exec(function(err,groups){
+			console.log(groups);
+			var filtered = [];
+			var n=0;
+			//Highly unoptimized code - need to make this faster
+			for(i=0;i<groups.length;++i){
+				for(j=0;j<groups[i].users.length;++j){
+					console.log(groups[i]);
+					if(groups[i].users[j].id==userId){
+						filtered[n] = groups[i];
+						n++;
+					}
+				}
+			}
+			return res.json(filtered);
+		});
+	}
 };
-

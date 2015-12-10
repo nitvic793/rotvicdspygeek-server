@@ -9,9 +9,8 @@ module.exports = {
   attributes: {
     groupName:"STRING",
     users:{
-      collection:"User"
+      collection:"User",
     },
-    //NOTE: need to make above as just a collection of users instead of teachers/parents distinction. This will mean changing the chat system to align with it.
     groupOwner:{
       model:"User"
     } //Id of group owner.
