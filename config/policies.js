@@ -49,7 +49,7 @@ module.exports.policies = {
 		// feed : ['isNiceToAnimals', 'hasRabbitFood']
 	// }
   UserController:{
-    '*':['isAuthorized']
+    //'*':['isAuthorized']
   },
   ParentsController:{
     create:'createUser'

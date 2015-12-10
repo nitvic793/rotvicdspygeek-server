@@ -15,20 +15,18 @@ var sockets = []; //HACK!
 module.exports = {
 	createChat: function(req,res){
 
-    function getUsers(parentId,teacherId, cb){
-      Parents.findOne({id:parentId}).exec(function(err,parent){
-        if(!err){
-          Teachers.findOne({'id':teacherId}).exec(function(err,teacher){
-            if(!err){
-              cb(parent,teacher);
-            }
-            else{
-              cb(parent,null);
-            }
+    function getUser(id,cb){
+      console.log(id);
+      Parents.findOne({user:id}).exec(function(err,data){
+        if(err || typeof data === 'undefined'){
+          var search = {user:{contains:id}};
+          console.log(search);
+          Teachers.findOne(search).exec(function(err,data){ //No clue why this works!
+            cb(data);
           });
         }
         else{
-          cb(null,null);
+          cb(data);
         }
       });
     }
@@ -47,9 +45,8 @@ module.exports = {
 		Chats.create(req.body).exec(function(err,data){
       console.log(data);
 			var pushToken;
-			if(data.sender=='Teacher'){
-				Parents.findOne({'id':req.body.parent}).exec(function(err,data){
-          sendSocketMessage(req.body.parent,req.body);
+			getUser(req.body.to, function(data){
+          sendSocketMessage(req.body.to,req.body);
 					if(data.pushToken){
 						var notification = {
 							"tokens":[data.pushToken],
@@ -62,24 +59,6 @@ module.exports = {
 						ionicPushServer(credentials, notification);
 					}
 				});
-			}
-			else{
-				Teachers.findOne({'id':req.body.teacher}).exec(function(err,data){
-          sendSocketMessage(req.body.teacher,req.body);
-					if(data.pushToken){
-						var notification = {
-							"tokens":[data.pushToken],
-							"notification":{
-								"title": "Message from " + data.firstname,
-								"alert": "Message from " + data.firstname
-              }
-
-						};
-            console.log("Message from " + data.firstname);
-						ionicPushServer(credentials, notification);
-					}
-				});
-			}
 			res.json(data);
 		});
 	},

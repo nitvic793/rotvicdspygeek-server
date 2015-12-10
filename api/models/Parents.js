@@ -16,6 +16,9 @@ module.exports = {
     },
     school:{
       model:"Schools"
+    },
+    user:{
+      model:"User"
     }
   },
   beforeCreate: function (body,next) {

@@ -18,6 +18,9 @@ module.exports = {
     registrationNo:"STRING",
     school : {
       model:"Schools"
+    },
+    user:{
+      model:"User"
     }
   },
   beforeCreate: function (body,next) {

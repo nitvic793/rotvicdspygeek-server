@@ -14,8 +14,9 @@ module.exports = {
     parents:{
       collection:"Parents"
     },
+    //NOTE: need to make above as just a collection of users instead of teachers/parents distinction. This will mean changing the chat system to align with it.
     groupOwner:{
       model:"User"
-    } //Id of group owner. Since it could be
+    } //Id of group owner.
   }
 };
