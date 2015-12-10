@@ -14,7 +14,6 @@ var sockets = []; //HACK!
 
 module.exports = {
 	createChat: function(req,res){
-
     function getUser(id,cb){
       console.log(id);
       Parents.findOne({user:id}).exec(function(err,data){
@@ -62,6 +61,58 @@ module.exports = {
 			res.json(data);
 		});
 	},
+  sendGroupChat: function(req,res){
+    //NOTE: Need to make these functions as services
+    function sendSocketMessage(userId, message){
+      console.log("Sending to Socket: ",userId, sockets[userId]);
+      if(sockets[userId]){
+        try{
+        sails.sockets.emit(sockets[userId],"groupMessage",message);
+        }
+        catch(e){
+          console.log("Exception: ",e);
+        }
+      }
+    }
+    function getUser(id,cb){
+      console.log(id);
+      Parents.findOne({user:id}).exec(function(err,data){
+        if(err || typeof data === 'undefined'){
+          var search = {user:{contains:id}};
+          console.log(search);
+          Teachers.findOne(search).exec(function(err,data){ //No clue why this works!
+            cb(data);
+          });
+        }
+        else{
+          cb(data);
+        }
+      });
+    }
+    function sendPush(users, message){
+      users.forEach(function(a,i,val){
+        getUser(val, function(data){
+          if(data.pushToken){
+						var notification = {
+							"tokens":[data.pushToken],
+							"notification":{
+								"title": "Message from " + data.firstname,
+								"alert": "Message from " + data.firstname
+              }
+						};
+            console.log("Message from " + data.firstname);
+						ionicPushServer(credentials, notification);
+            sendSocketMessage(val,message);
+        });
+      });
+    }
+    Chats.create(req.body).exec(function(err,data){
+      Groups.findOne({id:req.body.group}).exec(function(err,group){
+        sendPush(group.users, req.body);
+        return res.json(data);
+      });
+    });
+  },
   getSocketID: function(req, res) {
     if (!req.isSocket) return res.badRequest();
     var socketId = sails.sockets.id(req.socket);
