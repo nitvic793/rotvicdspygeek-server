@@ -79,7 +79,6 @@ module.exports = {
       Parents.findOne({user:id}).exec(function(err,data){
         if(err || typeof data === 'undefined'){
           var search = {user:{contains:id}};
-          console.log(search);
           Teachers.findOne(search).exec(function(err,data){ //No clue why this works!
             cb(data);
           });
@@ -89,15 +88,15 @@ module.exports = {
         }
       });
     }
-    function sendPush(users, message){
+    function sendPush(users, message, groupName){
       users.forEach(function(a,i,val){
-        getUser(val, function(data){
+        getUser(a.id, function(data){
           if(data.pushToken){
 						var notification = {
 							"tokens":[data.pushToken],
 							"notification":{
-								"title": "Message from " + data.firstname,
-								"alert": "Message from " + data.firstname
+								"title": "Group Message from " + groupName,
+								"alert": "Group Message from " + groupName
               }
 						};
             console.log("Message from " + data.firstname);
@@ -109,8 +108,8 @@ module.exports = {
     }
 
     Chats.create(req.body).exec(function(err,data){
-      Groups.findOne({id:req.body.group}).exec(function(err,group){
-        sendPush(group.users, req.body);
+      Groups.findOne({id:req.body.group}).populate('users').exec(function(err,group){
+        sendPush(group.users, req.body, group.groupName);
         return res.json(data);
       });
     });
