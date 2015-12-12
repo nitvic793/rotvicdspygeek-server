@@ -18,7 +18,7 @@ module.exports = {
       console.log(id);
       Parents.findOne({user:id}).exec(function(err,data){
         if(err || typeof data === 'undefined'){
-          var search = {user:{contains:id}};
+          var search = {user:id};
           console.log(search);
           Teachers.findOne(search).exec(function(err,data){ //No clue why this works!
             cb(data);
