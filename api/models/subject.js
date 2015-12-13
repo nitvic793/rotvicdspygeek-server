@@ -8,6 +8,9 @@
 module.exports = {
 
   attributes: {
-    subjectName:"STRING"
+    subjectName:"STRING",
+    school:{
+      model:"Schools"
+    }
   }
 };

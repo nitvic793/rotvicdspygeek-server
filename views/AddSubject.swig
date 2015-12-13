@@ -11,7 +11,11 @@
 <hr/>
 <form action="../subject/create" method="post">
 <input type="text" placeholder="Subject Name" name="subjectName"/>
-
+<select name="school">
+{% for school in schools %}
+  <option value="{{ school.id }}">{{ school.schoolName }}</option>
+{% endfor %}
+</select>
 <input type="submit" class="button" value="Add Record">
 </form>
 </div>
