@@ -88,9 +88,7 @@ module.exports = {
         }
       });
     }
-    function sendPush(users, message, groupName){
-      for(var i=0;i<users.length;++i){
-        var a = users[i];
+    function sendPush(a, message, groupName){
         getUser(a.id, function(data){
           if(data.pushToken){
 						var notification = {
@@ -105,14 +103,14 @@ module.exports = {
             sendSocketMessage(a.id,message);
           }
         });
-      }
     }
 
     Chats.create(req.body).exec(function(err,data){
       Groups.findOne({id:req.body.group}).populate('users').exec(function(err,group){
-        console.log("Users in group:");
-        console.log(group.users);
-        sendPush(group.users, req.body, group.groupName);
+        group.users.forEach(function(val,index,array){
+          console.log("Sending push for ", val.email);
+          sendPush(val, req.body, group.groupName);
+        });
         return res.json(data);
       });
     });
