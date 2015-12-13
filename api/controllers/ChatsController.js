@@ -89,7 +89,8 @@ module.exports = {
       });
     }
     function sendPush(users, message, groupName){
-      users.forEach(function(a,i,val){
+      for(var i=0;i<users.length;++i){
+        var a = users[i];
         getUser(a.id, function(data){
           if(data.pushToken){
 						var notification = {
@@ -104,7 +105,7 @@ module.exports = {
             sendSocketMessage(a.id,message);
           }
         });
-      });
+      }
     }
 
     Chats.create(req.body).exec(function(err,data){
