@@ -115,16 +115,22 @@ module.exports = {
     });
   },
   distinctChatUsers : function(req,res){
-      var userId = req.param('id');
+      var userId = req.param('userid');
+      console.log(userId);
       if(userId){
-        Chats.native(function(err, collection) {
-          if (err) return res.serverError(err);
-          collection.distinct('from',{to:userId})
-          .toArray(function (err, results) {
-              if (err) return res.serverError(err);
-              return res.json(results);
-            });
-          });
+        var users = [];
+        Chats.find({to:userId}).exec(function(err,chats){
+          if(err){
+            return res.serverError();
+          }
+          console.log(chats);
+          for(var i=0;i<chats.length;++i){
+            if(users.indexOf(chats[i].from)==-1){
+              users.push(chats[i].from);
+            }
+          }
+          return res.json(users);
+        });
       }
       else{
         return res.ok("No input");
