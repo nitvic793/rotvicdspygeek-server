@@ -126,6 +126,9 @@ module.exports = {
             });
           });
       }
+      else{
+        return res.ok("No input");
+      }
   },
   getSocketID: function(req, res) {
     if (!req.isSocket) return res.badRequest();
