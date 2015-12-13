@@ -7,7 +7,7 @@
 {% block content %}
 <div class="row">
 <div class="large-12 columns">
-<h3>Add Class</h3>
+<h3>Add Subject</h3>
 <hr/>
 <form action="../subject/create" method="post">
 <input type="text" placeholder="Subject Name" name="subjectName"/>

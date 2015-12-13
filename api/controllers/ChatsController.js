@@ -114,6 +114,19 @@ module.exports = {
       });
     });
   },
+  distinctChatUsers : function(req,res){
+      var userId = req.params('id');
+      if(userId){
+        Chats.native(function(err, collection) {
+          if (err) return res.serverError(err);
+          collection.distinct('from',{to:userId})
+          .toArray(function (err, results) {
+              if (err) return res.serverError(err);
+              return res.json(results);
+            });
+          });
+      }
+  },
   getSocketID: function(req, res) {
     if (!req.isSocket) return res.badRequest();
     var socketId = sails.sockets.id(req.socket);
