@@ -76,7 +76,6 @@ module.exports = {
     }
     function getUser(id,cb){
       Parents.findOne({user:id}).exec(function(err,data){
-        console.log("getUser()",id,data);
         if(err || typeof data === 'undefined'){
           var search = {user:{contains:id}};
           Teachers.findOne(search).exec(function(err,data){ //No clue why this works!
@@ -90,7 +89,6 @@ module.exports = {
     }
     function sendPush(a, message, groupName){
         getUser(a.id, function(data){
-          console.log("sendPush()",a.id,data);
           if(data.pushToken){
 						var notification = {
 							"tokens":[data.pushToken],
@@ -99,17 +97,17 @@ module.exports = {
 								"alert": "Group Message from " + groupName
               }
 						};
-            console.log("Message sent to " + data.firstname);
 						ionicPushServer(credentials, notification);
-            sendSocketMessage(a.id,message);
           }
+          console.log("Message sent to " + data.firstname);
+          sendSocketMessage(a.id,message);
         });
     }
 
     Chats.create(req.body).exec(function(err,data){
       Groups.findOne({id:req.body.group}).populate('users').exec(function(err,group){
         group.users.forEach(function(val,index,array){
-          console.log("Sending push for ", val.email);
+          console.log("Sending push/socket message for ", val.email);
           sendPush(val, req.body, group.groupName);
         });
         return res.json(data);
