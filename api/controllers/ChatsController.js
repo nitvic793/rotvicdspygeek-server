@@ -75,8 +75,8 @@ module.exports = {
       }
     }
     function getUser(id,cb){
-      console.log(id);
       Parents.findOne({user:id}).exec(function(err,data){
+        console.log("getUser()",id,data);
         if(err || typeof data === 'undefined'){
           var search = {user:{contains:id}};
           Teachers.findOne(search).exec(function(err,data){ //No clue why this works!
@@ -90,6 +90,7 @@ module.exports = {
     }
     function sendPush(a, message, groupName){
         getUser(a.id, function(data){
+          console.log("sendPush()",a.id,data);
           if(data.pushToken){
 						var notification = {
 							"tokens":[data.pushToken],
