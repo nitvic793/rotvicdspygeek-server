@@ -115,7 +115,7 @@ module.exports = {
     });
   },
   distinctChatUsers : function(req,res){
-      var userId = req.params('id');
+      var userId = req.param('id');
       if(userId){
         Chats.native(function(err, collection) {
           if (err) return res.serverError(err);
