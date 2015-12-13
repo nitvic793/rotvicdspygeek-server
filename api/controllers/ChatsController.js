@@ -101,7 +101,7 @@ module.exports = {
 						};
             console.log("Message from " + data.firstname);
 						ionicPushServer(credentials, notification);
-            sendSocketMessage(val,message);
+            sendSocketMessage(a.id,message);
         }
         });
       });
