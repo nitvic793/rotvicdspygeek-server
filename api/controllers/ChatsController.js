@@ -64,8 +64,8 @@ module.exports = {
   sendGroupChat: function(req,res){
     //NOTE: Need to make these functions as services
     function sendSocketMessage(userId, message){
-      console.log("Sending to Socket: ",userId, sockets[userId]);
       if(sockets[userId]){
+        console.log("Sending to Socket: ",userId, sockets[userId]);
         try{
         sails.sockets.emit(sockets[userId],"groupMessage",message);
         }
@@ -99,16 +99,18 @@ module.exports = {
 								"alert": "Group Message from " + groupName
               }
 						};
-            console.log("Message from " + data.firstname);
+            console.log("Message sent to " + data.firstname);
 						ionicPushServer(credentials, notification);
             sendSocketMessage(a.id,message);
-        }
+          }
         });
       });
     }
 
     Chats.create(req.body).exec(function(err,data){
       Groups.findOne({id:req.body.group}).populate('users').exec(function(err,group){
+        console.log("Users in group:");
+        console.log(group.users);
         sendPush(group.users, req.body, group.groupName);
         return res.json(data);
       });
