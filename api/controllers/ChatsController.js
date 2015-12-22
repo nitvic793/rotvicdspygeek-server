@@ -18,7 +18,7 @@ module.exports = {
       console.log(id);
       Parents.findOne({user:id}).exec(function(err,data){
         if(err || typeof data === 'undefined'){
-          var search = {user:{contains:id}};
+          var search = {user:id};
           console.log(search);
           Teachers.findOne(search).exec(function(err,data){ //No clue why this works!
             cb(data);
@@ -46,17 +46,19 @@ module.exports = {
 			var pushToken;
 			getUser(req.body.to, function(data){
           sendSocketMessage(req.body.to,req.body);
-					if(data.pushToken){
-						var notification = {
-							"tokens":[data.pushToken],
-							"notification":{
-								"title": "Message from " + data.firstname,
-								"alert": "Message from " + data.firstname
-              }
-						};
-            console.log("Message from " + data.firstname);
-						ionicPushServer(credentials, notification);
-					}
+          getUser(req.body.from, function(fromData){
+            if(data.pushToken){
+  						var notification = {
+  							"tokens":[data.pushToken],
+  							"notification":{
+  								"title": "Message from " + fromData.firstname,
+  								"alert": "Message from " + fromData.firstname
+                }
+  						};
+              console.log("Message from " + fromData.firstname);
+  						ionicPushServer(credentials, notification);
+  					}
+          });
 				});
 			res.json(data);
 		});
