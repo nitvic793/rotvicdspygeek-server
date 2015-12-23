@@ -68,6 +68,20 @@ module.exports = {
   },
   test: function(req,res){
     return res.json({t:Teacher});
+  },
+  sendEmail: function(req,res){
+    var payload   = {
+      to      : 'nithishvictor@gmail.com',
+      from    : 'support@bitstax.io',
+      subject : 'Saying Hi',
+      text    : 'This is my first email through SendGrid'
+    } ;
+    sendgrid.send(payload, function(err, json) {
+      if (err) { console.error(err); }
+      console.log(json);
+    });
+    return res.ok();
   }
-  
+
+
 };

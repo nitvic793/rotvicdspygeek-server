@@ -19,10 +19,12 @@ module.exports = {
       required: 'true',
       unique: true // Yes unique one
     },
-    
+
     encryptedPassword: {
       type: 'string'
     },
+    
+    approved:"STRING",
 
     // We don't wan't to send back encrypted password either
     toJSON: function () {

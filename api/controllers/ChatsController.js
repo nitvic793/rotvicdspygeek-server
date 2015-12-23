@@ -56,6 +56,7 @@ module.exports = {
                 }
   						};
               console.log("Message from " + fromData.firstname);
+              if(!data.officeHours && !utility.isOfficeHours(data.settings))
   						ionicPushServer(credentials, notification);
   					}
           });
@@ -99,6 +100,7 @@ module.exports = {
 								"alert": "Group Message from " + groupName
               }
 						};
+            if(!data.officeHours && !utility.isOfficeHours(data.settings))
 						ionicPushServer(credentials, notification);
           }
           console.log("Message sent to " + data.firstname);
