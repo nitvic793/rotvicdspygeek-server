@@ -56,8 +56,12 @@ module.exports = {
                 }
   						};
               console.log("Message from " + fromData.firstname);
+              console.log("Office Hours: " + utility.isOfficeHours(data.settings) + " " + data.officeHours);
               if(!data.officeHours && !utility.isOfficeHours(data.settings))
-  						ionicPushServer(credentials, notification);
+  						{
+                console.log("Sending push!");
+                ionicPushServer(credentials, notification);
+              }
   					}
           });
 				});
@@ -80,7 +84,8 @@ module.exports = {
     function getUser(id,cb){
       Parents.findOne({user:id}).exec(function(err,data){
         if(err || typeof data === 'undefined'){
-          var search = {user:{contains:id}};
+          var search = {user:id};
+          console.log(search);
           Teachers.findOne(search).exec(function(err,data){ //No clue why this works!
             cb(data);
           });
@@ -101,7 +106,10 @@ module.exports = {
               }
 						};
             if(!data.officeHours && !utility.isOfficeHours(data.settings))
-						ionicPushServer(credentials, notification);
+						{
+              console.log("Sending push!");
+              ionicPushServer(credentials, notification);
+            }
           }
           console.log("Message sent to " + data.firstname);
           sendSocketMessage(a.id,message);
